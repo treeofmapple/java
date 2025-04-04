@@ -9,13 +9,29 @@ import org.lwjgl.opengl.GL11;
 public class Screen {
 
     private long window;
+    private boolean fullscreen = false;
+    private int windowedWidth = 800;
+    private int windowedHeight = 600;
+    private int windowPosX, windowPosY;
 
-    protected void windowed() {
-        long primaryMonitor = GLFW.glfwGetPrimaryMonitor();
-	    GLFWVidMode vidMode = GLFW.glfwGetVideoMode(primaryMonitor);
-        int width = (int) (vidMode.width() * 0.75);
-        int height = (int) (vidMode.height() * 0.75);    	
+    protected void run() {
+        init();
+        loop();
+        cleanup();
     }
+
+    protected void keepRunning() {
+    	while(keepOnRunning) {
+    		input();
+    		update();
+    		render();
+    	}
+    }
+    
+    
+    
+    
+    
     
     protected void init() {
         GLFWErrorCallback.createPrint(System.err).set();
@@ -23,14 +39,8 @@ public class Screen {
         if (!GLFW.glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
-
-        window = GLFW.glfwCreateWindow(800, 600, "LWJGL Window", 0, 0);
-        if (window == 0) {
-            throw new RuntimeException("Failed to create GLFW window");
-        }
-
-        GLFW.glfwMakeContextCurrent(window);
-        GLFW.glfwShowWindow(window);
+        
+        createWindow();
     }
     
     protected void loop() {
@@ -42,6 +52,13 @@ public class Screen {
 
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();
+
+            if (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_F11) == GLFW.GLFW_PRESS) {
+                toggleFullscreen();
+                while (GLFW.glfwGetKey(window, GLFW.GLFW_KEY_F11) == GLFW.GLFW_PRESS) {
+                    GLFW.glfwPollEvents();
+                }
+            }
         }
     }
     
@@ -49,4 +66,42 @@ public class Screen {
         GLFW.glfwDestroyWindow(window);
         GLFW.glfwTerminate();
     }
+    
+    protected void toggleFullscreen() {
+    	fullscreen = !fullscreen;
+    	long oldWindow = window;
+    	GLFW.glfwHideWindow(oldWindow);
+    	GLFW.glfwDestroyWindow(oldWindow);
+    	createWindow();
+    	GL.createCapabilities();
+    }
+    
+    private void createWindow() {
+        long monitor = fullscreen ? GLFW.glfwGetPrimaryMonitor() : 0;
+        GLFWVidMode vidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
+
+        if (fullscreen) {
+            windowedWidth = vidMode.width();
+            windowedHeight = vidMode.height();
+        } else {
+            windowedWidth = (int)(vidMode.width() * 0.75);
+            windowedHeight = (int)(vidMode.height() * 0.75);
+        }
+
+        window = GLFW.glfwCreateWindow(windowedWidth, windowedHeight, "LWJGL Window", monitor, 0);
+
+        if (window == 0) {
+            throw new RuntimeException("Failed to create GLFW window");
+        }
+
+        if (!fullscreen) {
+            windowPosX = (vidMode.width() - windowedWidth) / 2;
+            windowPosY = (vidMode.height() - windowedHeight) / 2;
+            GLFW.glfwSetWindowPos(window, windowPosX, windowPosY);
+        }
+
+        GLFW.glfwMakeContextCurrent(window);
+        GLFW.glfwShowWindow(window);
+    }
+    
 }

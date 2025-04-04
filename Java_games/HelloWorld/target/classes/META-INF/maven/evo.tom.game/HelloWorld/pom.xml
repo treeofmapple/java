@@ -41,7 +41,12 @@
 	        <groupId>org.lwjgl</groupId>
 	        <artifactId>lwjgl</artifactId>
 	        <version>${lwjgl.version}</version>
-	        <classifier>natives-windows</classifier>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.lwjgl</groupId>
+	        <artifactId>lwjgl</artifactId>
+	        <version>${lwjgl.version}</version>
+	        <classifier>${native.target}</classifier>
 	    </dependency>
 	
 	    <!-- OpenGL -->
@@ -50,6 +55,12 @@
 	        <artifactId>lwjgl-opengl</artifactId>
 	        <version>${lwjgl.version}</version>
 	    </dependency>
+	    <dependency>
+	        <groupId>org.lwjgl</groupId>
+	        <artifactId>lwjgl-opengl</artifactId>
+	        <version>${lwjgl.version}</version>
+	        <classifier>${native.target}</classifier>
+	    </dependency>
 	
 	    <!-- GLFW (Window & Input Handling) -->
 	    <dependency>
@@ -57,12 +68,24 @@
 	        <artifactId>lwjgl-glfw</artifactId>
 	        <version>${lwjgl.version}</version>
 	    </dependency>
+	    <dependency>
+	        <groupId>org.lwjgl</groupId>
+	        <artifactId>lwjgl-glfw</artifactId>
+	        <version>${lwjgl.version}</version>
+	        <classifier>${native.target}</classifier>
+	    </dependency>
 	
 	    <!-- 3D Model Loading (Assimp) -->
 	    <dependency>
 	        <groupId>org.lwjgl</groupId>
 	        <artifactId>lwjgl-assimp</artifactId>
 	        <version>${lwjgl.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.lwjgl</groupId>
+	        <artifactId>lwjgl-assimp</artifactId>
+	        <version>${lwjgl.version}</version>
+	        <classifier>${native.target}</classifier>
 	    </dependency>
 	
 	    <!-- GUI Development (Nuklear) -->
@@ -141,12 +164,11 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.36</version>
-		    <scope>provided</scope>
+            <groupId>org.projectlombok</groupId>
+	        <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
+            <scope>provided</scope>
 		</dependency>
-		
 	</dependencies>
 
 	<build>
@@ -160,12 +182,48 @@
 	                    <path>
 	                        <groupId>org.projectlombok</groupId>
 	                        <artifactId>lombok</artifactId>
+	                        <version>1.18.38</version>
 	                    </path>
 	                </annotationProcessorPaths>
 	            </configuration>
 	        </plugin>
 	    </plugins>
 	</build>
-
+	
+    <profiles>
+        <profile>
+            <id>windows-profile</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <native.target>natives-windows</native.target>
+            </properties>                
+        </profile>
+        <profile>
+            <id>linux-profile</id>
+            <activation>
+                <os>
+                    <family>Linux</family>
+                </os>
+            </activation>
+            <properties>
+                <native.target>natives-linux</native.target>
+            </properties>                
+        </profile>
+        <profile>
+            <id>OSX-profile</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <native.target>natives-osx</native.target>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
