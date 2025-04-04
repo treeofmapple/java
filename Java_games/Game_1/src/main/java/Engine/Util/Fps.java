@@ -1,7 +1,7 @@
-package Engine.Core.Util;
+package Engine.Util;
 
 public class Fps {
-
+	
 	float timeCount;
 	int fps;
 	int fpsCount;
@@ -27,5 +27,4 @@ public class Fps {
 	        timeCount -= 1f;
 	    }
 	}
-	
 }
