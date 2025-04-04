@@ -6,6 +6,8 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
+import Engine.Core.Util.SystemTime;
+
 public class Screen {
 
     private long window;
@@ -25,6 +27,9 @@ public class Screen {
     		input();
     		update();
     		render();
+	        if (GLFW.glfwWindowShouldClose(window)) {
+	            keepOnRunning = false;
+	        }
     	}
     }
     
@@ -34,6 +39,7 @@ public class Screen {
     
     
     protected void init() {
+    	lastLoopTime = SystemTime.getTime();
         GLFWErrorCallback.createPrint(System.err).set();
 
         if (!GLFW.glfwInit()) {
