@@ -1,5 +1,7 @@
 package Windows;
 
+import java.util.concurrent.Callable;
+
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -9,9 +11,10 @@ import org.lwjgl.opengl.GL11;
 import Engine.Util.Time;
 
 
-public class Screen {
+public class Windows {
 
     private long window;
+    private Callable<Void> resizeFunc;
     private boolean fullscreen = false;
     private int windowedWidth = 800;
     private int windowedHeight = 600;

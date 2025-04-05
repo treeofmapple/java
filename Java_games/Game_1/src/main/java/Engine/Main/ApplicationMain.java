@@ -1,6 +1,8 @@
 package Engine.Main;
 
-public class ApplicationMain extends {
+import Engine.Core.Engine;
+
+public class ApplicationMain extends Engine {
 	public static void main(String[] args) {
 		new ApplicationMain().run();
 	}
