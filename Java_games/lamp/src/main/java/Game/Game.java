@@ -1,51 +1,45 @@
 package Game;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_F11;
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+import org.lwjgl.glfw.GLFW;
 
 import Engine.Util.Input;
-import Window.Windows;
+import Window.Windo;
 
 public class Game implements Runnable {
 	public Thread game;
-	public Windows screen;
-	public static final int WIDTH = 1280, HEIGHT = 760;
-
+	public Windo window;
+	public final int WIDTH = 1280, HEIGHT = 760;
+	
 	public void start() {
 		game = new Thread(this, "game");
 		game.start();
 	}
-
-	private void init() {
-		screen = new Windows(WIDTH, HEIGHT, "Game");
-		screen.setBackgroundColor(1.0f, 0, 0);
-		screen.create();
+	
+	public void init() {
+		window = new Windo(WIDTH, HEIGHT, "Game");
+		window.setBackgroundColor(1.0f, 0, 0);
+		window.create();
 	}
-
+	
 	public void run() {
 		init();
-		while (!screen.shouldClose() && Input.isKeyDown(GLFW_KEY_ESCAPE)) {
+		while (!window.shouldClose() && !Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) {
 			update();
 			render();
-			if (Input.isKeyDown(GLFW_KEY_F11)) {
-				screen.setFullscreen(!screen.isFullscreen());
-			}
+			if (Input.isKeyDown(GLFW.GLFW_KEY_F11)) window.setFullscreen(!window.isFullscreen());
 		}
-		screen.destroy();
+		window.destroy();
 	}
-
+	
 	private void update() {
-		screen.update();
-		if (Input.isButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
-			System.out.println("X: " + Input.getMouseX() + ", Y: " + Input.getMouseY());
-		}
+		window.update();
+		if (Input.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT)) System.out.println("X: " + Input.getScrollX() + ", Y: " + Input.getScrollY());
 	}
-
+	
 	private void render() {
-		screen.swapBuffers();
+		window.swapBuffers();
 	}
-
+	
 	public static void main(String[] args) {
 		new Game().start();
 	}
