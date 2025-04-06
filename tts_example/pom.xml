@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.tom.samples</groupId>
+	<artifactId>tts</artifactId>
+	<version>v1</version>
+	<name>Text-To-Speech</name>
+
+	<licenses>
+		<license>
+			<name>BSD 2-Clause License</name>
+			<url>https://opensource.org/license/bsd-2-clause</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Samuel</name>
+			<url>https://github.com/treeofmapple</url>
+			<organization>Comical Ferret</organization>
+			<organizationUrl>https://github.com/Pato-Incomum</organizationUrl>
+		</developer>
+	</developers>
+
+	<properties>
+		<java.version>21</java.version>
+	</properties>
+
+	<repositories>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+		    <groupId>net.sf.sociaal</groupId>
+		    <artifactId>freetts</artifactId>
+		    <version>1.2.2</version>
+		</dependency>
+	
+		<dependency>
+		    <groupId>net.sf.phat</groupId>
+		    <artifactId>sphinx4-core</artifactId>
+		    <version>5prealpha</version>
+		</dependency>
+	
+	</dependencies>
+
+</project>

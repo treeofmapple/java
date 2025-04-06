@@ -9,7 +9,7 @@ import Window.Windows;
 
 public class Game implements Runnable {
 	public Thread game;
-	public static Windows screen;
+	public Windows screen;
 	public static final int WIDTH = 1280, HEIGHT = 760;
 
 	public void start() {
@@ -29,11 +29,10 @@ public class Game implements Runnable {
 			update();
 			render();
 			if (Input.isKeyDown(GLFW_KEY_F11)) {
-				screen.setFullscreen(!screen.isFullScreen());
+				screen.setFullscreen(!screen.isFullscreen());
 			}
 		}
 		screen.destroy();
-
 	}
 
 	private void update() {
