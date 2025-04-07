@@ -6,6 +6,9 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
+import lombok.Getter;
+
+@Getter
 public class Input {
 	private static boolean[] keys = new boolean[GLFW.GLFW_KEY_LAST];
 	private static boolean[] buttons = new boolean[GLFW.GLFW_MOUSE_BUTTON_LAST];

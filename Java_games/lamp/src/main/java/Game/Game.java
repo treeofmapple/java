@@ -1,46 +1,16 @@
 package Game;
 
-import org.lwjgl.glfw.GLFW;
+import Engine.Core.Systems;
 
-import Engine.Util.Input;
-import Window.Windo;
-
-public class Game implements Runnable {
-	public Thread game;
-	public Windo window;
-	public final int WIDTH = 1280, HEIGHT = 760;
+public class Game extends Systems {
 	
-	public void start() {
-		game = new Thread(this, "game");
-		game.start();
-	}
-	
-	public void init() {
-		window = new Windo(WIDTH, HEIGHT, "Game");
-		window.setBackgroundColor(1.0f, 0, 0);
-		window.create();
-	}
-	
-	public void run() {
-		init();
-		while (!window.shouldClose() && !Input.isKeyDown(GLFW.GLFW_KEY_ESCAPE)) {
-			update();
-			render();
-			if (Input.isKeyDown(GLFW.GLFW_KEY_F11)) window.setFullscreen(!window.isFullscreen());
-		}
-		window.destroy();
-	}
-	
-	private void update() {
-		window.update();
-		if (Input.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT)) System.out.println("X: " + Input.getScrollX() + ", Y: " + Input.getScrollY());
-	}
-	
-	private void render() {
-		window.swapBuffers();
-	}
+	private final static String title = "PaperMache";
+	private final static int FPS = 60;
+	private final static int UPS = 60;
+	private final static int width = 1280;
+	private final static int height = 720;
 	
 	public static void main(String[] args) {
-		new Game().start();
+		new Game().start(title, FPS, UPS, width, height, true);
 	}
 }
