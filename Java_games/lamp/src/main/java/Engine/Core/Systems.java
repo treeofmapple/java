@@ -1,16 +1,17 @@
 package Engine.Core;
 
 import Engine.Render.Render;
+import Game.Config.Configuration;
 import Game.Scene.Scene;
 import Windows.Screen;
 import Windows.ScreenOptions;
 
 public class Systems implements IAppLogic {
 
-	Systems system = new Systems();
+	private Configuration config = new Configuration();
 	
-	protected void start(String title, int FPS, int UPS, int width, int height, boolean abs) {
-		Engine gameEngine = new Engine(new ScreenOptions(title, FPS, UPS, width, height, abs), system);
+	protected void start() {
+		Engine gameEngine = new Engine(new ScreenOptions(config.getTitle(), config.getFps(), config.getUps(), config.getWidth(), config.getHeight(), true));
 		gameEngine.start();
 	}
 	
