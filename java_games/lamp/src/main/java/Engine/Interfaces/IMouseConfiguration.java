@@ -1,6 +1,6 @@
 package Engine.Interfaces;
 
-import Game.Config.GameConfiguration;
+import Engine.Config.GameConfiguration;
 
 public interface IMouseConfiguration {
 
