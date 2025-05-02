@@ -1,4 +1,4 @@
-package Engine.Scene;
+package Engine.Object;
 
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
