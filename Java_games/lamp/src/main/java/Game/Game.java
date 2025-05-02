@@ -1,9 +1,10 @@
 package Game;
 
-import Engine.Core.Systems;
+import Engine.Core.EngineCore;
 
-public class Game extends Systems {
+public class Game {
 	public static void main(String[] args) {
-		new Game().start();
+		EngineCore.run(Game.class, args);
 	}
+
 }

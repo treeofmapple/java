@@ -1,11 +1,10 @@
 package Game.Scene;
 
+import lombok.Data;
+
+@Data
 public class Scene {
 
-	public Scene() {
-		
-	}
-	
 	public void cleanup() {
 		
 	}

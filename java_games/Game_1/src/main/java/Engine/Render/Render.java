@@ -1,10 +1,10 @@
 package Engine.Render;
 
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.glClear;
-
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
+
+import Game.Scene.Scene;
+import Windows.Screen;
 
 public class Render {
 
@@ -16,8 +16,8 @@ public class Render {
 		
 	}
 	
-	public void render() {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	public void render(Screen screen, Scene scene) {
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 	}
 	
 }
