@@ -7,7 +7,12 @@ import org.joml.Vector3f;
 public class EntityObject extends Entity {
 
 	public EntityObject(String id, String modelId) {
-		instantiateVariables(id, modelId);
+        this.id = id;
+        this.modelId = modelId;
+        modelMatrix = new Matrix4f();
+        position = new Vector3f();
+        rotation = new Quaternionf();
+        scale = 1;
 	}
 	
 	@Override
@@ -23,15 +28,6 @@ public class EntityObject extends Entity {
 	@Override
 	protected void updateModelMatrix() {
         modelMatrix.translationRotateScale(position, rotation, scale);
-	}
-
-	private void instantiateVariables(String id, String modelId) {
-        this.id = id;
-        this.modelId = modelId;
-        modelMatrix = new Matrix4f();
-        position = new Vector3f();
-        rotation = new Quaternionf();
-        scale = 1;
 	}
 
 }
