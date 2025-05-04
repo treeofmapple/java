@@ -4,9 +4,9 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
-public class FirstPerspective extends Camera {
+public class FreeCam extends Camera {
 
-	public FirstPerspective() {
+	public FreeCam() {
 		direction = new Vector3f();
 		right = new Vector3f();
 		up = new Vector3f();

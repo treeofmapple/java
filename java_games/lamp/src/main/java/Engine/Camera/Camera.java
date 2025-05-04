@@ -26,6 +26,5 @@ public abstract class Camera {
 	protected Vector3f up;
 	
 	protected abstract void updateViewMatrix();
-	protected void instantiateVariables() {};
 	
 }
